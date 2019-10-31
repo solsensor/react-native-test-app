@@ -26,8 +26,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Wifi from 'react-native-iot-wifi';
+import {
+	createAppContainer,
+} from 'react-navigation';
+import {
+	createStackNavigator,
+} from 'react-navigation-stack';
 
-const App: () => React$Node = () => {
+const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
 	const updateSSID = () => Wifi.getSSID(setSSID);
 	const connect = () => {
@@ -104,6 +110,19 @@ const App: () => React$Node = () => {
     </>
   );
 };
+
+const LoginPage = () => {
+	return (
+      <StatusBar barStyle="dark-content" />
+	);
+};
+
+const MainNavigator = createStackNavigator({
+	Main: { screen: HelloWorldPage },
+	Login: { screen: LoginPage },
+}, {});
+
+const App = createAppContainer(MainNavigator);
 
 const styles = StyleSheet.create({
   scrollView: {
