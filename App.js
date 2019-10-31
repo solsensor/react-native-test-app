@@ -32,6 +32,9 @@ import {
 import {
 	createStackNavigator,
 } from 'react-navigation-stack';
+import {
+	createBottomTabNavigator,
+} from 'react-navigation-tabs';
 
 const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
@@ -122,7 +125,12 @@ const MainNavigator = createStackNavigator({
 	Login: { screen: LoginPage },
 }, {});
 
-const App = createAppContainer(MainNavigator);
+const TabNavigator = createBottomTabNavigator({
+	Main: HelloWorldPage,
+	Login: LoginPage,
+})
+
+const App = createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   scrollView: {
