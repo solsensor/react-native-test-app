@@ -33,6 +33,7 @@ import {
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
 
 const HelloWorldPage = () => {
@@ -131,10 +132,11 @@ const AuthNavigator = createStackNavigator({
 const App = createAppContainer(
 	createSwitchNavigator(
 		{
+			AuthLoading: AuthLoadingScreen,
 			Auth: AuthNavigator,
 			App: AppNavigator
 		},
-		{ InitialRouteName: 'Auth' },
+		{ InitialRouteName: 'AuthLoading' },
 	)
 );
 
