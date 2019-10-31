@@ -28,13 +28,12 @@ import {
 import Wifi from 'react-native-iot-wifi';
 import {
 	createAppContainer,
+	createSwitchNavigator,
 } from 'react-navigation';
-import {
-	createStackNavigator,
-} from 'react-navigation-stack';
-import {
-	createBottomTabNavigator,
-} from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import LoginScreen from './screens/LoginScreen';
 
 const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
@@ -114,23 +113,30 @@ const HelloWorldPage = () => {
   );
 };
 
-const LoginPage = () => {
+const OtherPage = () => {
 	return (
       <StatusBar barStyle="dark-content" />
 	);
 };
 
-const MainNavigator = createStackNavigator({
-	Main: { screen: HelloWorldPage },
-	Login: { screen: LoginPage },
-}, {});
-
-const TabNavigator = createBottomTabNavigator({
+const AppNavigator = createBottomTabNavigator({
 	Main: HelloWorldPage,
-	Login: LoginPage,
-})
+	Other: OtherPage,
+});
 
-const App = createAppContainer(TabNavigator);
+const AuthNavigator = createStackNavigator({
+	Login: { screen: LoginScreen },
+});
+
+const App = createAppContainer(
+	createSwitchNavigator(
+		{
+			Auth: AuthNavigator,
+			App: AppNavigator
+		},
+		{ InitialRouteName: 'Auth' },
+	)
+);
 
 const styles = StyleSheet.create({
   scrollView: {
