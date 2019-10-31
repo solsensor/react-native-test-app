@@ -6,13 +6,14 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   Text,
+	TouchableOpacity,
   StatusBar,
 } from 'react-native';
 
@@ -24,7 +25,22 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Wifi from 'react-native-iot-wifi';
+
 const App: () => React$Node = () => {
+	const [ssid, setSSID] = useState(null);
+	const updateSSID = () => Wifi.getSSID(setSSID);
+	const connect = () => {
+		Wifi.connectSecure('HKZR2', 'WBV82DP9GGSYXNFH', false, err => {
+			updateSSID()
+		});
+	};
+	const disconnect = () => {
+		Wifi.removeSSID('HKZR2', err => {
+			updateSSID()
+		});
+	};
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -39,6 +55,23 @@ const App: () => React$Node = () => {
             </View>
           )}
           <View style={styles.body}>
+
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>WiFi</Text>
+              <Text style={styles.sectionDescription}>
+		  SSID is {ssid ? ssid : 'null'}
+              </Text>
+		      <TouchableOpacity onPress={updateSSID}>
+		        <Text>Update</Text>
+		      </TouchableOpacity>
+		      <TouchableOpacity onPress={connect}>
+		        <Text>Connect</Text>
+		      </TouchableOpacity>
+		      <TouchableOpacity onPress={disconnect}>
+		        <Text>Disconnect and remove</Text>
+		      </TouchableOpacity>
+            </View>
+
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>
