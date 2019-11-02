@@ -4,8 +4,9 @@ import {
 	View,
 	StyleSheet,
   Text,
-	AsyncStorage,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import Input from '../components/Input';
 import Button from '../components/Button';
 

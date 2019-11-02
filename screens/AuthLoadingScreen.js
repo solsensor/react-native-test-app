@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import {
 	ActivityIndicator,
-	AsyncStorage,
 	StyleSheet,
 	View,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class AuthLoadingScreen extends React.Component {
 	componentDidMount() {
