@@ -6,6 +6,7 @@ import {
   Text,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { encode } from 'base-64';
 
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -32,23 +33,35 @@ class LoginScreen extends React.Component {
 	};
 
 	_onSubmit = () => {
+		const hash = encode(`${this.state.email}:${this.state.password}`);
 		fetch('https://dev.solsensor.com/api/token', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': `Basic ${hash}`,
 			},
 			body: JSON.stringify({
 				email: this.state.email,
 				password: this.state.password,
 			}),
 		})
-			.then(res => res.json())
-			.then(json => {
-				console.log(json);
-				AsyncStorage.setItem('userToken', json.token);
+			.then(res => (
+				res.json().then(json => ({
+					status: res.status,
+					json: json,
+				}))
+			))
+			.then(res => {
+				console.log(res.status);
+				console.log(res.json);
+				if (res.status !== 200) {
+					throw `failure status: ${res.status}`;
+				}
+				console.log(res.json.token);
+				AsyncStorage.setItem('userToken', res.json.token);
 			})
-			.then(() => this._navigateToApp)
-			.catch(err => console.error(err));
+			.then(() => this._navigateToApp())
+			.catch(err => console.warn(err));
 	}
 
 	_navigateToApp = () => {
