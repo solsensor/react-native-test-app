@@ -4,6 +4,7 @@ import {
 	View,
 	StyleSheet,
   Text,
+	AsyncStorage,
 } from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -30,14 +31,28 @@ class LoginScreen extends React.Component {
 	};
 
 	_onSubmit = () => {
-		if (this.state.email === 'ryan@ryanchipman.com' && this.state.password === 'mypassword') {
-			this._navigateToApp();
-		}
+		fetch('https://dev.solsensor.com/api/token', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: this.state.email,
+				password: this.state.password,
+			}),
+		})
+			.then(res => res.json())
+			.then(json => {
+				console.log(json);
+				AsyncStorage.setItem('userToken', json.token);
+			})
+			.then(() => this._navigateToApp)
+			.catch(err => console.error(err));
 	}
 
-	_navigateToApp() {
+	_navigateToApp = () => {
 		this.props.navigation.navigate('App');
-	}
+	};
 
 	render() {
 		return (

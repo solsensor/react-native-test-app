@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import {
 	ActivityIndicator,
 	AsyncStorage,
-	StatusBar,
 	StyleSheet,
 	View,
 } from 'react-native';
@@ -21,7 +20,6 @@ class AuthLoadingScreen extends React.Component {
 		return (
 			<View>
 				<ActivityIndicator />
-				<StatusBar barStyle='default' />
 			</View>
 		);
 	}
