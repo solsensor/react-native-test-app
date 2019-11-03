@@ -32,11 +32,14 @@ import {
 } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Provider } from 'mobx-react';
 
 import AddSensorScreen from './screens/AddSensorScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SettingsScreen from './screens/SettingsScreen';
+
+import solStore from './stores/solStore';
 
 const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
@@ -132,7 +135,7 @@ const AuthNavigator = createStackNavigator({
 	Login: { screen: LoginScreen },
 });
 
-const App = createAppContainer(
+const NavigationContainer = createAppContainer(
 	createSwitchNavigator(
 		{
 			AuthLoading: AuthLoadingScreen,
@@ -142,6 +145,12 @@ const App = createAppContainer(
 		{ InitialRouteName: 'AuthLoading' },
 	)
 );
+
+const App = () => (
+	<Provider solStore={solStore}>
+		<NavigationContainer />
+	</Provider>
+)
 
 const styles = StyleSheet.create({
   scrollView: {
