@@ -13,7 +13,7 @@ import {
   ScrollView,
   View,
   Text,
-	TouchableOpacity,
+  TouchableOpacity,
   StatusBar,
 } from 'react-native';
 
@@ -35,6 +35,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
+import SettingsScreen from './screens/SettingsScreen';
 
 const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
@@ -122,7 +123,7 @@ const OtherPage = () => {
 
 const AppNavigator = createBottomTabNavigator({
 	Main: HelloWorldPage,
-	Other: OtherPage,
+	Settings: SettingsScreen,
 });
 
 const AuthNavigator = createStackNavigator({
