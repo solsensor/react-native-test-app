@@ -28,7 +28,9 @@ class NetworkInfoScreen extends React.Component {
 			<SafeAreaView style={styles.container}>
 			<View>
 				<Button title="Refresh" onPress={() => this.props.wifiStore.update()} />
+				<Text>Enabled: {this.props.wifiStore.enabled}</Text>
 				<Text>Current SSID: {this.props.wifiStore.current}</Text>
+				<Text>Available SSIDs: {this.props.wifiStore.available}</Text>
 			</View>
 			</SafeAreaView>
 		</>
