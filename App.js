@@ -33,6 +33,7 @@ import {
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
+import AddSensorScreen from './screens/AddSensorScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -123,6 +124,7 @@ const OtherPage = () => {
 
 const AppNavigator = createBottomTabNavigator({
 	Main: HelloWorldPage,
+	Add: AddSensorScreen,
 	Settings: SettingsScreen,
 });
 
