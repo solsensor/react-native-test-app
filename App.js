@@ -38,8 +38,10 @@ import AddSensorScreen from './screens/AddSensorScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import NetworkInfoScreen from './screens/NetworkInfoScreen';
 
 import solStore from './stores/solStore';
+import wifiStore from './stores/wifiStore';
 
 const HelloWorldPage = () => {
 	const [ssid, setSSID] = useState(null);
@@ -126,7 +128,7 @@ const OtherPage = () => {
 };
 
 const AppNavigator = createBottomTabNavigator({
-	Main: HelloWorldPage,
+	Wifi: NetworkInfoScreen,
 	Add: AddSensorScreen,
 	Settings: SettingsScreen,
 });
@@ -147,7 +149,7 @@ const NavigationContainer = createAppContainer(
 );
 
 const App = () => (
-	<Provider solStore={solStore}>
+	<Provider solStore={solStore} wifiStore={wifiStore}>
 		<NavigationContainer />
 	</Provider>
 )

@@ -5350,6 +5350,11 @@ react-native-tab-view@^2.9.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.10.0.tgz#5e249e5650502010013449ffd4e5edc18a95364b"
   integrity sha512-qgexVz5eO4yaFjdkmn/sURXgVvaBo6pZD/q1eoca96SbPVbaH3WzVhF3bRUfeTHwZkXwznFTpS3JURqIFU8vQA==
 
+react-native-wifi-reborn@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-wifi-reborn/-/react-native-wifi-reborn-2.1.0.tgz#38789c6851e6c1e9c3582975ac274682e0e006c1"
+  integrity sha512-kR0DMtaihEUDIQ1Y55t2PcqYOw+WbEMnAdT21guzTAuvch7VqMZBeThojFBsN63Q0NaOddE9IlFewcUpCw6epA==
+
 react-native@0.61.3:
   version "0.61.3"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.61.3.tgz#0c7e299ccfa3a5efc6e87e88563f9dc444389aca"
